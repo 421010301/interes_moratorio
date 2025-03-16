@@ -1,5 +1,7 @@
 import Papa from "papaparse";
 
+const API = process.env.NEXT_PUBLIC_BASE_URL;
+
 const MESES: { [key: number]: string } = {
   1: "Ene",
   2: "Feb",
@@ -21,7 +23,8 @@ interface CSVRow {
 }
 
 export const fetchUdisCSV = async (): Promise<CSVRow[]> => {
-  const response = await fetch("/udis.csv"); // Archivo en la carpeta public
+  console.log(process.env);
+  const response = await fetch(`${API}/udis.csv`); // Archivo en la carpeta public
   const csvText = await response.text();
 
   return new Promise((resolve, reject) => {
@@ -48,7 +51,8 @@ interface CCPRow {
 }
 
 export const fetchCCPUdis = async (): Promise<CCPRow[]> => {
-  const response = await fetch("/ccp-udis.csv"); // Archivo en la carpeta public
+  console.log(API);
+  const response = await fetch(`${API}/ccp-udis.csv`); // Archivo en la carpeta public
   const csvText = await response.text();
 
   return new Promise((resolve, reject) => {
